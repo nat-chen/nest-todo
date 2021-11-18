@@ -1,0 +1,21 @@
+{
+  "name": "nest-todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:client": "cd client && yarn start",
+    "start:server": "cd server && yarn start:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nat-chen/nest-todo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nat-chen/nest-todo/issues"
+  },
+  "homepage": "https://github.com/nat-chen/nest-todo#readme"
+}
