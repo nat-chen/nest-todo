@@ -2,31 +2,39 @@ import { PrismaService } from './../../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { Todo } from './entities/todo.entity';
 
 @Injectable()
 export class TodoService {
   constructor(private prisma: PrismaService) {}
 
-  private todos: Todo[] = [{ id: 1, title: '晚饭', description: '我想吃饭', status: 1 }];
-
-  create(createTodoDto: CreateTodoDto): string {
-    return 'created';
+  create(createTodoDto: CreateTodoDto) {
+    const { title, description } = createTodoDto;
+    return this.prisma.todo.create({
+      data: { title, description, status: 1 }
+    });
   }
 
   findAll() {
     return this.prisma.todo.findMany();
   }
 
-  findOne(id: string) {
-    return 'findOne';
+  findOne(id: number) {
+    return this.prisma.todo.findUnique({
+      where: { id }
+    });
   }
 
-  update(id: string, updateTodoDto: UpdateTodoDto) {
-    return 'update';
+  update(id: number, updateTodoDto: UpdateTodoDto) {
+    const { title, description, status } = updateTodoDto;
+    return this.prisma.todo.update({
+      data: { title, description, status },
+      where: { id },
+    });
   }
 
-  remove(id: string) {
-    return 'removed';
+  remove(id: number) {
+    return this.prisma.todo.delete({
+      where: { id }
+    })
   }
 }
