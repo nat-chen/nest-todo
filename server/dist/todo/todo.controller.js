@@ -28,13 +28,13 @@ let TodoController = class TodoController {
         return this.todoService.findAll();
     }
     findOne(id) {
-        return this.todoService.findOne(+id);
+        return this.todoService.findOne(id);
     }
     update(id, updateTodoDto) {
-        return this.todoService.update(+id, updateTodoDto);
+        return this.todoService.update(id, updateTodoDto);
     }
     remove(id) {
-        return this.todoService.remove(+id);
+        return this.todoService.remove(id);
     }
 };
 __decorate([

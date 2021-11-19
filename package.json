@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/nat-chen/nest-todo/issues"
   },
-  "homepage": "https://github.com/nat-chen/nest-todo#readme"
+  "homepage": "https://github.com/nat-chen/nest-todo#readme",
+  "dependencies": {
+    "@nestjs/swagger": "^5.1.5",
+    "swagger-ui-express": "^4.1.6"
+  }
 }
