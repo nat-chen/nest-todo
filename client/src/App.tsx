@@ -7,11 +7,13 @@ const baseURL = "http://localhost:8888";
 const App: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [newTodoTitle, setNewTodoTitle] = useState<string>("");
+  // new todo
+  const [newTodoTitle, setNewTodoTitle] = useState<string>('');
+  const [newTodoDesc, setNewTodoDesc] = useState('');
 
   useEffect(() => {
     fetchTodos().then();
-  });
+  }, []);
 
   const fetchTodos = async() => {
     setLoading(true);
@@ -24,6 +26,7 @@ const App: FC = () => {
     setLoading(true);
     const newTodo: Omit<Todo, 'id'> = {
       title: newTodoTitle,
+      description: newTodoDesc,
       status: 0,
     };
     await axios.request<Todo>({ baseURL, url: '/todo', method: 'POST', data: newTodo });
@@ -42,15 +45,20 @@ const App: FC = () => {
     <div className="App">
       { loading && <div>Loading...</div> }
       <div>
-        <input onChange={e => setNewTodoTitle(e.target.value)} placeholder="输入新待办事项" type="text" />
+        <div>
+          <input onChange={e => setNewTodoTitle(e.target.value)} placeholder="输入新的待办事项" type="text" />
+        </div>
+        <div>
+          <textarea value={newTodoDesc} onChange={e => setNewTodoDesc(e.target.value)} cols={30} rows={10} />
+        </div>
         <button onClick={addTodo}>添加</button>
       </div>
 
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            <p>{todo.title}</p>
-            <small>{todo.description}</small>
+            <p>标题：{todo.title}</p>
+            <small>具体内容：{todo.description}</small>
             <div>
               <button onClick={() => deleteTodo(todo.id)}>移除</button>
             </div>
