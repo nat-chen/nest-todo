@@ -1,4 +1,8 @@
-import { ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException
+} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Observable } from "rxjs";
 import { Reflector } from "@nestjs/core";
@@ -10,7 +14,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     super();
   }
 
-  canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
+  canActivate(
+    context: ExecutionContext
+  ): boolean | Promise<boolean> | Observable<boolean> {
     // add your custom authentication logic here
     // 自定义用户身份验证逻辑
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
