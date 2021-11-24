@@ -2,19 +2,18 @@ import { FC, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import authContext from '../../contexts/authContext';
 
-interface Props {}
-
-const Login: FC<Props> = () => {
+const Login: FC = () => {
   let history = useHistory();
   let location = useLocation();
   let auth = useContext(authContext);
 
   // @ts-ignore
-  let { from } = location.state || { from: { pathname: '/' }};
-  let login = () => {
-    auth.login(() => {
+  const  { from } = location.state || { from: { pathname: '/' }};
+  const login = async () => {
+    const isLogin = await auth.login();
+    if (isLogin) {
       history.replace(from);
-    });
+    }
   };
 
   return (
