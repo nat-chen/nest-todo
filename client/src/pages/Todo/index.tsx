@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import axios from 'axios';
 import { ITodo } from '../../../types/Todo';
-import { baseURL } from '../../constants';
+import http from '../../http';
 
 const Todo: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -17,7 +16,7 @@ const Todo: FC = () => {
 
   const fetchTodos = async () => {
     setLoading(true);
-    const { data } = await axios.request<ITodo[]>({ baseURL, url: '/todo', method: 'GET' });
+    const { data } = await http.get<ITodo[]>('/todo');
     setTodos(data);
     setLoading(false);
   };
@@ -28,14 +27,14 @@ const Todo: FC = () => {
       ...newTodo,
       status: 0,
     };
-    await axios.request<ITodo>({ baseURL, url: '/todo', method: 'POST', data: newTodoData });
+    await http.post<ITodo>('/todo', { data: newTodoData });
     setLoading(false);
     await fetchTodos();
   };
 
   const deleteTodo = async (id: number | undefined) => {
     setLoading(true);
-    await axios.request<ITodo>({ baseURL, url: `/todo/${id}`, method: 'DELETE' });
+    await http.delete<ITodo>(`/todo/${id}`);
     setLoading(false);
     await fetchTodos();
   }
