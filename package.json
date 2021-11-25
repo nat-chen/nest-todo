@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/nat-chen/nest-todo#readme",
   "dependencies": {
+    "@nestjs/serve-static": "^2.2.2",
     "@nestjs/swagger": "^5.1.5",
     "swagger-ui-express": "^4.1.6"
   }
