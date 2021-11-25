@@ -18,7 +18,7 @@ const useProvideAuth = () => {
   const [user, setUser] = useState<IUser | null>(null);
   const login = async (data: any) => {
     try {
-      const response = await http.post('/auth/login', { data });
+      const response = await http.post('/auth/login', data);
       localStorage.setItem('token', response.data.access_token);
       setUser(response.data.user);
       return true;
