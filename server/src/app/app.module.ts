@@ -6,7 +6,7 @@ import { TodoModule } from '../todo/todo.module';
 import { UserModule } from '../user/user.module';
 import { AuthModule } from './../auth/auth.module';
 import { UploadModule } from './../upload/upload.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
+import { StaticModule } from '../static/static.module';
 
 @Module({
   imports: [
@@ -14,9 +14,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
     TodoModule,
     UserModule,
     UploadModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'upload_dist'),
-    })
+    StaticModule,
   ],
   controllers: [AppController],
   providers: [AppService],
