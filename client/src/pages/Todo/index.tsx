@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { ITodo } from '../../../types/Todo';
 import TodoForm from '../../Components/TodoForm';
 import http from '../../http';
+import List from "./List";
 
 const Todo: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -59,23 +60,14 @@ const Todo: FC = () => {
 
       <hr />
 
-      <ul>
-        {todos.map(todo => (
-          <li key={todo.id}>
-            <p>标题：{todo.title}</p>
-            <small>具体内容：{todo.description}</small>
-            <div>
-              <button onClick={() => deleteTodo(todo.id)}>移除</button>
-              <button
-                onClick={() => {
-                  setFormType('update')
-                  setSelected(todo)
-                }}
-              >编辑</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <List
+        todoList={todos}
+        onDelete={deleteTodo}
+        onEdit={(todo) => {
+          setFormType("update");
+          setSelected(todo);
+        }}
+      />
     </div>
   )
 }
