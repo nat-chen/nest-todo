@@ -6,7 +6,8 @@ export interface IUser {
 }
 
 interface IAuth {
-  user: IUser | null;
+  token: string | null;
+  setToken: Function;
   login: Function;
   logout: Function;
 }
@@ -14,7 +15,8 @@ interface IAuth {
 const authContext = createContext<IAuth>({
   login: async () => {},
   logout: async () => {},
-  user: null,
+  token: null,
+  setToken: () => {},
 });
 
 export default authContext;
