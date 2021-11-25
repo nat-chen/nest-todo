@@ -8,8 +8,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-
-const baseURL = 'http://localhost:8888/static/'
+import { baseURL } from './constants';
 
 @ApiTags('文件上传')
 @ApiBearerAuth()
