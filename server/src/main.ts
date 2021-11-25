@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-const startSwagger = (app) => {
+const setUpSwagger = (app) => {
   const config = new DocumentBuilder()
     .setTitle('待办事项')
     .setDescription('nest-todo 的 API 文档')
@@ -20,7 +20,7 @@ async function bootstrap() {
     }
   });
 
-  startSwagger(app);
+  setUpSwagger(app);
 
   await app.listen(8888);
 }
