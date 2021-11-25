@@ -17,4 +17,7 @@ export class Todo {
 
   @ApiProperty()
   status: TodoStatus; // 状态
+
+  @ApiProperty()
+  media?: string;
 }

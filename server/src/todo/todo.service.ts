@@ -9,9 +9,9 @@ export class TodoService {
   constructor(private prisma: PrismaService) {}
 
   create(createTodoDto: CreateTodoDto): Promise<Todo> {
-    const { title, description } = createTodoDto;
+    const { title, description, media } = createTodoDto;
     return this.prisma.todo.create({
-      data: { title, description, status: 1 }
+      data: { title, description, status: 1, media }
     });
   }
 
@@ -26,9 +26,9 @@ export class TodoService {
   }
 
   update(id: number, updateTodoDto: UpdateTodoDto): Promise<Todo> {
-    const { title, description, status } = updateTodoDto;
+    const { title, description, status, media } = updateTodoDto;
     return this.prisma.todo.update({
-      data: { title, description, status },
+      data: { title, description, status, media },
       where: { id },
     });
   }
