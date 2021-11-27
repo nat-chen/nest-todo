@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from './../roles/roles.decorator';
+import { Role } from './../roles/roles.interface';
+import { RolesGuard } from '../auth/guards/roles.guard';
 
 @ApiTags('user')
 @ApiBearerAuth()
@@ -16,6 +19,8 @@ export class UserController {
   }
 
   @Get()
+  @Roles(Role.Admin)
+  @UseGuards(RolesGuard)
   findAll() {
     return this.userService.findAll();
   }
